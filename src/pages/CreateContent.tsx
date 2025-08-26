@@ -3,10 +3,12 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { Loader2, Copy } from "lucide-react";
+import { RichTextEditor } from "@/components/RichTextEditor";
 
 const CreateContent = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [content, setContent] = useState("");
+  const [editableContent, setEditableContent] = useState("");
   const { toast } = useToast();
 
   const formatContent = (text: string) => {
@@ -43,7 +45,9 @@ const CreateContent = () => {
 
       if (response.ok) {
         const data = await response.text();
+        const formattedContent = formatContent(data);
         setContent(data);
+        setEditableContent(formattedContent);
         toast({
           title: "Success!",
           description: "Content generated successfully!",
@@ -65,7 +69,7 @@ const CreateContent = () => {
 
   const handleCopyContent = async () => {
     try {
-      await navigator.clipboard.writeText(content);
+      await navigator.clipboard.writeText(editableContent);
       toast({
         title: "Success!",
         description: "Content copied to clipboard!",
@@ -138,14 +142,10 @@ const CreateContent = () => {
                     </Button>
                   </div>
                   
-                  <Card className="bg-background/50 border-primary/20">
-                    <CardContent className="p-6">
-                      <div 
-                        className="prose prose-lg max-w-none text-foreground prose-headings:text-foreground prose-strong:text-foreground prose-p:text-muted-foreground prose-li:text-muted-foreground prose-h1:text-2xl prose-h2:text-xl prose-h3:text-lg prose-h1:font-bold prose-h2:font-semibold prose-h3:font-medium prose-h1:mb-6 prose-h2:mb-4 prose-h3:mb-3 prose-p:mb-4"
-                        dangerouslySetInnerHTML={{ __html: formatContent(content) }}
-                      />
-                    </CardContent>
-                  </Card>
+                  <RichTextEditor 
+                    content={editableContent}
+                    onChange={setEditableContent}
+                  />
                 </div>
 
                 <div className="text-center">
