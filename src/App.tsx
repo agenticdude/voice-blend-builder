@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import BlogConfig from "./pages/BlogConfig";
 import AdvancedConfig from "./pages/AdvancedConfig";
 import OutlineCreation from "./pages/OutlineCreation";
+import CreateContent from "./pages/CreateContent";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -20,6 +21,7 @@ const App = () => (
           <Route path="/" element={<BlogConfig />} />
           <Route path="/advanced-config" element={<AdvancedConfig />} />
           <Route path="/outline-creation" element={<OutlineCreation />} />
+          <Route path="/create-content" element={<CreateContent />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

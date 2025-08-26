@@ -71,6 +71,8 @@ const OutlineCreation = () => {
           description: "Outline submitted successfully!",
         });
         setOutline("");
+        // Navigate to create content page
+        window.location.href = "/create-content";
       } else {
         throw new Error("Failed to submit outline");
       }
