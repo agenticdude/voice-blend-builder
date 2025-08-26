@@ -73,11 +73,12 @@ const AdvancedConfig = () => {
       });
 
       if (response.ok) {
-        setSubmitted(true);
         toast({
           title: "Submitted successfully!",
           description: "Your advanced configuration has been saved.",
         });
+        // Navigate to outline creation
+        navigate("/outline-creation");
       } else {
         throw new Error("Failed to submit");
       }
