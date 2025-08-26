@@ -9,6 +9,28 @@ const CreateContent = () => {
   const [content, setContent] = useState("");
   const { toast } = useToast();
 
+  const formatContent = (text: string) => {
+    return text
+      .replace(/^# (.+)$/gm, '<h1>$1</h1>')
+      .replace(/^## (.+)$/gm, '<h2>$1</h2>')
+      .replace(/^### (.+)$/gm, '<h3>$1</h3>')
+      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*(.+?)\*/g, '<em>$1</em>')
+      .replace(/^- (.+)$/gm, '<li>$1</li>')
+      .replace(/(<li>.*<\/li>)/gs, '<ul>$1</ul>')
+      .replace(/<\/ul>\s*<ul>/g, '')
+      .replace(/\n\n/g, '</p><p>')
+      .replace(/^(?!<[hul])/gm, '<p>')
+      .replace(/(?<![>])\n(?![<])/g, '</p><p>')
+      .replace(/<p><\/p>/g, '')
+      .replace(/^<p>(<h[1-6]>)/gm, '$1')
+      .replace(/(<\/h[1-6]>)<\/p>/g, '$1')
+      .replace(/^<p>(<ul>)/gm, '$1')
+      .replace(/(<\/ul>)<\/p>/g, '$1')
+      .replace(/^<p>(<li>)/gm, '$1')
+      .replace(/(<\/li>)<\/p>/g, '$1');
+  };
+
   const handleGenerateContent = async () => {
     setIsLoading(true);
     try {
@@ -119,8 +141,8 @@ const CreateContent = () => {
                   <Card className="bg-background/50 border-primary/20">
                     <CardContent className="p-6">
                       <div 
-                        className="prose prose-sm max-w-none text-foreground prose-headings:text-foreground prose-strong:text-foreground prose-p:text-muted-foreground prose-li:text-muted-foreground"
-                        dangerouslySetInnerHTML={{ __html: content.replace(/\n/g, '<br />') }}
+                        className="prose prose-lg max-w-none text-foreground prose-headings:text-foreground prose-strong:text-foreground prose-p:text-muted-foreground prose-li:text-muted-foreground prose-h1:text-2xl prose-h2:text-xl prose-h3:text-lg prose-h1:font-bold prose-h2:font-semibold prose-h3:font-medium prose-h1:mb-6 prose-h2:mb-4 prose-h3:mb-3 prose-p:mb-4"
+                        dangerouslySetInnerHTML={{ __html: formatContent(content) }}
                       />
                     </CardContent>
                   </Card>
