@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Switch } from "@/components/ui/switch";
 import { useToast } from "@/hooks/use-toast";
 import { Sparkles } from "lucide-react";
 
@@ -12,6 +13,7 @@ const BlogConfig = () => {
   const [blogTitle, setBlogTitle] = useState("");
   const [seoKeywords, setSeoKeywords] = useState("");
   const [contentSource, setContentSource] = useState("");
+  const [webSearch, setWebSearch] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
@@ -40,6 +42,7 @@ const BlogConfig = () => {
           blog_title: blogTitle,
           seo_keywords: seoKeywords,
           content_source: contentSource,
+          web_search: webSearch,
         }),
       });
 
@@ -135,6 +138,22 @@ const BlogConfig = () => {
                     <SelectItem value="AI Generated">AI Generated</SelectItem>
                   </SelectContent>
                 </Select>
+              </div>
+
+              <div className="flex items-center justify-between space-x-2">
+                <div className="space-y-1">
+                  <Label htmlFor="web-search" className="text-sm font-medium">
+                    Enable Web Search
+                  </Label>
+                  <p className="text-xs text-muted-foreground">
+                    Include web search results in content generation
+                  </p>
+                </div>
+                <Switch
+                  id="web-search"
+                  checked={webSearch}
+                  onCheckedChange={setWebSearch}
+                />
               </div>
 
               <Button 
