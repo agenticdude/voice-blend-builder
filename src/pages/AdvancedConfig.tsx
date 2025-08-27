@@ -56,7 +56,7 @@ const AdvancedConfig = () => {
     setIsSubmitting(true);
     
     try {
-      const response = await fetch("https://n8n.dev.aioapp.com/webhook/6ea1b457-5d59-41be-8dda-b588521c5a7b", {
+      const response = await fetch("https://n8n.dev.aioapp.com/webhook-test/6ea1b457-5d59-41be-8dda-b588521c5a7b", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
