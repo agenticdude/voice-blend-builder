@@ -33,7 +33,7 @@ const BlogConfig = () => {
     setIsSubmitting(true);
     
     try {
-      const response = await fetch("https://n8n.dev.aioapp.com/webhook-test/5a6f3605-f853-4dee-b751-9d4b657a81bf", {
+      const response = await fetch("https://n8n.dev.aioapp.com/webhook/5a6f3605-f853-4dee-b751-9d4b657a81bf", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
